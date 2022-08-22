@@ -1,0 +1,50 @@
+# serverless.yml
+
+service: ems-dinghies
+
+useDotenv: true
+
+package:
+    individually: true
+
+plugins:
+    - serverless-webpack
+    - serverless-offline
+
+custom:
+    webpack:
+        webpackConfig: ./webpack_lambda.config.js
+        includeModules: true
+    contentEncoding:
+        contentCompression: 100
+    serverless-offline:
+        noPrependStageInUrl: true
+
+provider:
+    name: aws
+    runtime: nodejs16.x
+    stage: ${opt:stage, "dev"}
+    apiGateway:
+        shouldStartNameWithService: true
+    logs:
+        restApi:
+            format: 'requestId: $context.requestId, userAgent: $context.identity.userAgent, path: $context.path, requestTime: $context.requestTime'
+    endpointType: REGIONAL
+    region: eu-west-2
+    iam:
+        role:
+            statements:
+                - Effect: Allow
+                  Action:
+                      - lambda:InvokeFunction
+                  Resource: '*'
+    environment:
+        STAGE: ${self:provider.stage}
+
+functions:
+    staticApp:
+        memorySize: 512
+        handler: src/servers/static.handler
+        events:
+            - httpApi: ANY /
+            - httpApi: ANY /{proxy+}

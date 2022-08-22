@@ -1,0 +1,3 @@
+src/client/components/common/svg.tsx
+src/servers/lib/templates/privacy.html
+src/servers/lib/templates/terms.html

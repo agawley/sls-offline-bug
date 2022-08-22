@@ -1,0 +1,13 @@
+{
+    "entry": [
+        "src/client/index.tsx",
+        "src/client-public/index.tsx",
+        "src/servers/api.ts",
+        "src/servers/notifier.ts",
+        "src/servers/static.tsx"
+    ],
+    "ignorePatterns": [
+        "**/public/**",
+        "**/__mocks__/**"
+    ]
+}

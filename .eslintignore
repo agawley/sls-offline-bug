@@ -1,0 +1,5 @@
+# Ignore built files except build/index.js
+build/*
+src/public/*
+src/servers/lib/templates/terms.html
+src/servers/lib/templates/privacy.html
