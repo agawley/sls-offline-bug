@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --silent",
-    "offline": "webpack --config=webpack.config.js & sls offline start",
+    "offline": "sls offline start",
     "deploy": "set -e; git diff-index --quiet HEAD --; npm ci; tsc --noEmit; eslint ./src --ext .js,.jsx,.ts,.tsx; webpack --config=webpack.config.prod.js; jest --silent; npm version patch; sls deploy",
     "lint": "tsc --noEmit; eslint ./src --ext .js,.jsx,.ts,.tsx",
     "deployStaging": "set -e; npm ci; tsc --noEmit; eslint ./src --ext .js,.jsx,.ts,.tsx; webpack --config=webpack.config.prod.js; jest --silent; sls deploy --stage staging",
@@ -19,8 +19,6 @@
     "@loadable/server": "^5.15.0",
     "express": "^4.17.1",
     "node-fetch": "^2.6.7",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
     "request": "^2.88.2",
     "serverless-http": "^3.0.1",
     "xhr": "^2.6.0",

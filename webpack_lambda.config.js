@@ -1,9 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 // webpack.config.js
-const path = require('path');
 const slsw = require('serverless-webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const LoadablePlugin = require('@loadable/webpack-plugin');
 
 module.exports = {
     target: 'node',
@@ -21,21 +18,6 @@ module.exports = {
         hints: false,
     },
     resolve: { extensions: ['*', '.js', '.jsx', '.ts', '.tsx'] },
-    plugins: [
-        new LoadablePlugin(),
-        new CopyWebpackPlugin({
-            patterns: [
-                {
-                    from: './src/public/*',
-                },
-                {
-                    context: path.resolve(__dirname, 'src', 'servers', 'lib'),
-                    from: './templates/*',
-                    to: 'src/servers/',
-                },
-            ],
-        }),
-    ],
     module: {
         rules: [
             {
@@ -54,14 +36,8 @@ module.exports = {
                                 },
                             },
                         ],
-                        [
-                            '@babel/preset-react',
-                            {
-                                runtime: 'automatic',
-                            },
-                        ],
                     ],
-                    plugins: ['@babel/transform-runtime', '@loadable/babel-plugin'],
+                    plugins: ['@babel/transform-runtime'],
                 },
             },
         ],
